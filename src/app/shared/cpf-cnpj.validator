@@ -1,0 +1,20 @@
+import { Validator, AbstractControl } from "@angular/forms";
+import { ValidationErrors } from "@angular/forms";
+
+export class CpfCnpjValidator implements Validator {
+  static validate(c: AbstractControl): ValidationErrors | null {
+    if (c.value.lenght > 0) {
+      return null;
+    }
+    return {
+      invalid: true,
+    };
+  }
+
+  /**
+   * Implementa a interface de um validator.
+   */
+  validate(c: AbstractControl): ValidationErrors | null {
+    return CpfCnpjValidator.validate(c);
+  }
+}

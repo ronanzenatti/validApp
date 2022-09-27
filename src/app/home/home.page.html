@@ -7,13 +7,13 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-padding">Cadastro</h1>
   <ion-card>
-    <form [formGroup]="registerForm">
+    <form [formGroup]="registerForm" #formDir="ngForm">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
-        <ion-input formControlName="nome"></ion-input>
+        <ion-input id="nome" formControlName="nome"></ion-input>
         <ng-container *ngFor="let erro of mensagensValidacao.nome">
           <span
-            *ngIf="nome.errors?.['required'] && (nome.dirty || nome.touched)"
+            *ngIf="nome.errors?.[erro.tipo] && (nome.dirty || nome.touched)"
             class="msg-erro"
           >
             {{erro.mensagem}}
@@ -26,7 +26,15 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">CPF</ion-label>
-        <ion-input type="tel"></ion-input>
+        <ion-input type="tel" id="cpf" formControlName="cpf"></ion-input>
+        <ng-container *ngFor="let erro of mensagensValidacao.cpf">
+          <span
+            *ngIf="cpf.errors?.[erro.tipo] && (cpf.dirty || cpf.touched)"
+            class="msg-erro"
+          >
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
       </ion-item>
 
       <ion-item>

@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +15,11 @@ export class HomePage {
     email: ['', Validators.compose([Validators.required, Validators.email])],
     cpf: [
       '',
-      Validators.compose([Validators.required, Validators.minLength(13)]),
+      Validators.compose([
+        Validators.required,
+        Validators.minLength(13),
+        CpfCnpjValidator.validate,
+      ]),
     ],
     senha: [
       '',
@@ -42,7 +41,7 @@ export class HomePage {
     ],
     cpf: [
       { tipo: 'required', mensagem: 'O campo CPF é obrigatório.' },
-      { tipo: 'invalido', mensagem: 'CPF Inválido.' },
+      { tipo: 'invalid', mensagem: 'CPF Inválido.' },
     ],
     email: [
       { tipo: 'required', mensagem: 'O campo E-mail é obrigatório.' },
@@ -74,4 +73,11 @@ export class HomePage {
   };
 
   constructor(private formBuilder: FormBuilder) {}
+
+  get nome() {
+    return this.registerForm.get('nome')!;
+  }
+  get cpf() {
+    return this.registerForm.get('cpf')!;
+  }
 }
