@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-padding">Cadastro</h1>
   <ion-card>
-    <form [formGroup]="registerForm" #formDir="ngForm">
+    <form [formGroup]="registerForm">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
         <ion-input id="nome" formControlName="nome"></ion-input>
@@ -22,7 +22,15 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <ng-container *ngFor="let erro of mensagensValidacao.email">
+          <span
+            *ngIf="email.errors?.[erro.tipo] && (email.dirty || email.touched)"
+            class="msg-erro"
+          >
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
       </ion-item>
       <ion-item>
         <ion-label position="floating">CPF</ion-label>
@@ -39,11 +47,27 @@
 
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" formControlName="senha"></ion-input>
+        <ng-container *ngFor="let erro of mensagensValidacao.senha">
+          <span
+            *ngIf="senha.errors?.[erro.tipo] && (senha.dirty || senha.touched)"
+            class="msg-erro"
+          >
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Confirma Senha</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" formControlName="confirmaSenha"></ion-input>
+        <ng-container *ngFor="let erro of mensagensValidacao.confirmaSenha">
+          <span
+            *ngIf="confirmaSenha.errors?.[erro.tipo] && (confirmaSenha.dirty || confirmaSenha.touched)"
+            class="msg-erro"
+          >
+            {{erro.mensagem}}
+          </span>
+        </ng-container>
       </ion-item>
     </form>
 

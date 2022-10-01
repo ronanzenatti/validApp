@@ -1,3 +1,4 @@
+import { CpfCnpjValidator } from './../shared/cpf-cnpj.validator';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -25,7 +26,7 @@ export class HomePage {
       '',
       Validators.compose([Validators.required, Validators.minLength(6)]),
     ],
-    confirma: [
+    confirmaSenha: [
       '',
       Validators.compose([Validators.required, Validators.minLength(6)]),
     ],
@@ -41,7 +42,9 @@ export class HomePage {
     ],
     cpf: [
       { tipo: 'required', mensagem: 'O campo CPF é obrigatório.' },
-      { tipo: 'invalid', mensagem: 'CPF Inválido.' },
+      { tipo: 'digit', mensagem: 'CPF Inválido.' },
+      { tipo: 'length', mensagem: 'Quantidade de números inválido' },
+      { tipo: 'equalDigits', mensagem: 'Digite um CPF válido!' },
     ],
     email: [
       { tipo: 'required', mensagem: 'O campo E-mail é obrigatório.' },
@@ -75,9 +78,18 @@ export class HomePage {
   constructor(private formBuilder: FormBuilder) {}
 
   get nome() {
-    return this.registerForm.get('nome')!;
+    return this.registerForm.get('nome');
   }
   get cpf() {
-    return this.registerForm.get('cpf')!;
+    return this.registerForm.get('cpf');
+  }
+  get email() {
+    return this.registerForm.get('email');
+  }
+  get senha() {
+    return this.registerForm.get('senha');
+  }
+  get confirmaSenha() {
+    return this.registerForm.get('confirmaSenha');
   }
 }
