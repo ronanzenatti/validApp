@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'calc',
     loadChildren: () => import('./calc/calc.module').then( m => m.CalcPageModule)
+  },  {
+    path: 'calc2',
+    loadChildren: () => import('./calc2/calc2.module').then( m => m.Calc2PageModule)
   },
+
 ];
 
 @NgModule({
