@@ -10,7 +10,7 @@ export class Calc2Page implements OnInit {
   resultado = '';
   numero = false;
   caracter = true;
-  caracteres = [',', '/', '*', '+', '-'];
+  caracteres = ['.', '/', '*', '+', '-'];
 
   constructor() {}
 
@@ -48,8 +48,10 @@ export class Calc2Page implements OnInit {
       this.operacao = this.operacao.substring(0, this.operacao.length - 1);
     }
 
-    const ultimo = this.operacao.substring(-1);
+    const ultimo = this.operacao.substring(this.operacao.length, 1);
     this.caracter = this.caracteres.includes(ultimo);
+
+    console.log(ultimo);
 
     if (!this.caracter) {
       this.numero = true;
